@@ -1,21 +1,32 @@
 const Message = require("../model/message");
 
-exports.postMessage = async (req, res) => {
+exports.addMessage = async (req, res) => {
+  const { chatId, senderId, text } = req.body;
+  const message = new Message({
+    chatId,
+    senderId,
+    text,
+  });
+  console.log(message);
   try {
-    const {message} = new Message(req.body)
-    res.status(201);
-    res.send(message)
+    const result = await message.save();
+    res.status(200)
+    res.send(result);
   } catch (error) {
-    console.log(error);
+    res.status(500)
+    res.send(error)
   }
-}
+};
 
 exports.getMessages = async (req, res) => {
+  const { chatId } = req.params;
+  console.log(chatId);
   try {
-    const all = await Message.find();
-    res.status(201);
-    res.send(all)
+    const result = await Message.find({ chatId });
+    res.status(200)
+    res.send(result);
   } catch (error) {
-    console.log(error);
+    res.status(500)
+    res.send(error);
   }
-}
+};

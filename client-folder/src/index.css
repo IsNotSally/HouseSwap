@@ -314,3 +314,99 @@ button[type="submit"]:hover {
   overflow-x: scroll;
 }
 
+/* inbox */
+.chat {
+    background-color: lightgray;
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-container {
+    width: 25%;
+    height: 100vh;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 2px 2px 5px gray;
+}
+
+.contact-list-title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    height: 10%;
+}
+
+.contact-list {
+    padding: 0;
+    margin: 0;
+    height: 90%;
+}
+
+.contact {
+  display: flex;
+  background-color: #007bff;
+  height: 15%;
+}
+.chat-container {
+    width: 75%;
+    height: 100vh;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 2px 2px 5px gray;
+    overflow-y: scroll;
+}
+
+.chat-title {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    height: 10%;
+}
+
+.messages-container {
+    padding: 10px;
+    height: 80%;
+}
+
+.message {
+    margin-bottom: 10px;
+    height: 15%;
+    width: 70%;
+    background-color: #e5e5e5;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.message-text {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ccc;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 10%;
+}
+
+#text {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.send-button {
+    padding: 10px;
+    background-color:#007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

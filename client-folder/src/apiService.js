@@ -1,11 +1,7 @@
 
 const BASE_URL = 'http://localhost:3001'
 
-exports.getAllHouses = () => {
-  return fetch(`${BASE_URL}`)
-    .then((res) => res.json())
-    .catch((err) => console.log(err));
-}
+
 
 exports.login = (user) => {
   return fetch(`${BASE_URL}/login`, {
@@ -46,33 +42,66 @@ exports.logout = (tokenName) => {
     .catch((err) => console.log(err));
 }
 
+exports.getUser = (id) => {
+  return fetch(`${BASE_URL}/user/${id}`)
+  .then((res) => res.json())
+  .catch((err) => console.log(err));
+}
+
+exports.getAllHouses = () => {
+  return fetch(`${BASE_URL}`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}
+
+// exports.getUserHouses = (userId) => {
+//   return fetch(`${BASE_URL}/dashboard/${userId}`)
+//     .then((res) => res.json())
+//     .catch((err) => console.log(err));
+// }
 
 exports.createMyHome = (userId, home) => {
-  return fetch(`${BASE_URL}/dashboard/${userId}/my-home`, {
+  return fetch(`${BASE_URL}/dashboard/my-home`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ home }),
+    body: JSON.stringify({userId, home }),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
 }
 
-exports.sendMessages = (id, message) => {
-  return fetch(`${BASE_URL}/dashboard/${id}/inbox`, {
+exports.createChat  = () => {
+  return fetch(`${BASE_URL}/inbox`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({id, message}),
+    body: JSON.stringify(),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
 }
 
-exports.getAllMessages = (id) => {
-  return fetch(`${BASE_URL}/dashboard/${id}/inbox`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(id),
-  })
+exports.getChats = (id) => {
+  return fetch(`${BASE_URL}/inbox/${id}`)
     .then((res) => res.json())
     .catch((err) => console.log(err));
 }
+
+// exports.sendMessages = (id, message) => {
+//   return fetch(`${BASE_URL}/dashboard/inbox/`, {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({id, message}),
+//   })
+//     .then((res) => res.json())
+//     .catch((err) => console.log(err));
+// }
+
+// exports.getAllMessages = (id) => {
+//   return fetch(`${BASE_URL}/dashboard/inbox`, {
+//     method: 'GET',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(id),
+//   })
+//     .then((res) => res.json())
+//     .catch((err) => console.log(err));
+// }

@@ -1,8 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function House({ house }) {
- 
+export default function House({ house, setShowPrompt }) {
+  const { userHouse, isAuthenticated, userID } = useSelector(store => store.users)
+  const navigate = useNavigate()
+
+ const handleClick = () => {
+  if(!userHouse.length) {
+    setShowPrompt(true) 
+  } else {
+    navigate(`inbox/${userID}`)
+  }
+ }
+
   return (
     <div className='card'>
       <Link to={`/${house._id}`}>
@@ -23,7 +34,7 @@ export default function House({ house }) {
         <i className='fa fa-star'></i>
         <p>4.5</p>
       </div>
-
+    {isAuthenticated ? <button onClick={handleClick}>Contact {house.host_name}</button> : ''}
     </div>
 
   )

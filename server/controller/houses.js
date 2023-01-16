@@ -45,9 +45,9 @@ exports.getHouseById = async (req, res) => {
 
 exports.postHouse = async (req, res) => {
   try {
-    const  userId  = req.params.id;
-    const { home } = req.body
+    const  {userId, home}  = req.body;
     const newHouse = await new House({
+      userId: userId,
       host_name: home.hostname,
       description: home.description,
       location: home.location
@@ -61,5 +61,18 @@ exports.postHouse = async (req, res) => {
     console.log(error);
     res.status(401)
     res.send({ message: 'You must complete all the infos here!' })
+  }
+}
+
+exports.getUserHouse= async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.find({_id: userId})
+    res.status(201);
+    res.send(user)
+  } catch (error) {
+    console.log(error);
+    res.status(401)
+    res.send({ message: "You haven't create any home yet!" })
   }
 }

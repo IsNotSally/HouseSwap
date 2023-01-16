@@ -24,7 +24,7 @@ export default function Signup({handleClose,handleLoginClick}) {
       alert(`${res.message}`);
       localStorage.setItem('accessToken', res.accessToken);
       dispatch(setUserLogin())
-      navigate(`/dashboard/${res._id}`)
+      // navigate(`/dashboard/${res._id}`)
     }
   };
   

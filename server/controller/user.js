@@ -43,13 +43,26 @@ exports.login = async (req, res) => {
 }
 
 exports.logout= async (req, res) => {
-  
   try {
    
-
   } catch (error) {
     res
       .status(401)
       .send({ error: '401', message: 'Stay with us!' });
+  }
+}
+
+exports.getUser= async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await User.findById(id);
+    if (user) {
+      res.status(200)
+      res.send(user)
+    } else {
+      res.status(404).json("No such User");
+    }
+  } catch (error) {
+    res.status(500).json(error);
   }
 }

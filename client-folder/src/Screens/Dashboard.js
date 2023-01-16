@@ -1,21 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Discover from '../components/Discover'
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import House from '../components/House';
 import Navbar from '../components/Navbar';
-import { getAllHouses } from '../apiService';
-import { setHouses } from '../redux/houseSlice';
+import Prompt from '../components/Prompt';
+import { getUserHouses } from '../apiService';
+import { setUserHouse } from '../redux/userSlice';
 
 export default function Dashboard() {
-  //useEffect 
+  const {userID} = useSelector(store=>store.users);
+  const { houses } = useSelector(store => store.houses);
   const dispatch = useDispatch()
-  const { houses } = useSelector(store => store.houses)
-  const { id } = useParams()
+  //useEffect 
+//  useEffect(() => {
+//    //fetch user;s houses
+//    const getUserHouse = async () => {
+//     const res = await getUserHouses(userID);
+//     if (houses) {
+//       dispatch(setUserHouse(houses))
+//     }
+//   }
+//   getUserHouse()
+   
+//  }, [dispatch])
+ 
+  const [showPrompt, setShowPrompt] = useState(false)
+
   return (
     <div className='dashboard'>
       <Navbar />
+    
       <div className='call-to-action'>
         <h1>Ready to exchange? <br /> Create your house!</h1>
         <Link to={`my-home`}>
@@ -27,10 +42,11 @@ export default function Dashboard() {
 
       <div className='dashboard-list'>
         {
-          houses.map(house => <House key={house._id} house={house} />)
+          houses.map(house => <House key={house._id} house={house} setShowPrompt={setShowPrompt}/>)
         }
       </div>
-
+      
+      {showPrompt ? <Prompt setShowPrompt={setShowPrompt}/> : ''}
 
     </div>
   )

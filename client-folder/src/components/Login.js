@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { login } from '../apiService';
 import { handleChange, setUserLogin } from '../redux/userSlice';
 
@@ -8,7 +7,6 @@ export default function Login({ handleClose, handleSignupClick }) {
   
   const {formData } = useSelector(store => store.users)
   const dispatch = useDispatch();
-  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     dispatch(handleChange(e.target));
@@ -23,8 +21,9 @@ export default function Login({ handleClose, handleSignupClick }) {
     } else {
       alert(`${res.message}`);
       localStorage.setItem('accessToken', res.accessToken);
-      dispatch(setUserLogin())
-      navigate(`/dashboard/${res.id}`)
+      dispatch(setUserLogin(res.id))
+      // navigate(`/dashboard`)
+
     }
   };
 

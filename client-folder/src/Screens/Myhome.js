@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { createMyHome } from '../apiService';
 import { addHouse } from '../redux/houseSlice';
+import { setUserHouse } from '../redux/userSlice';
 
 export default function Myhome() {
+  const {userID} = useSelector(store=>store.users)
   const navigate = useNavigate();
 const dispatch = useDispatch()
   //handle calendar selected date
@@ -53,17 +55,16 @@ const dispatch = useDispatch()
   }
 
   //send request to server to create home and update the database 
-  const {id} = useParams();
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(id, formData);
-    const res = await createMyHome(id, formData)
+    const res = await createMyHome(userID, formData)
     if (res.error) {
       alert(`${res.message}`);
     } else {
       alert(`${res.message}`);
-      dispatch(addHouse(formData))
-      navigate(`/dashboard/${id}`)
+      dispatch(addHouse(res.newHouse))
+      dispatch(setUserHouse(res.newHouse._id))
+      navigate(`/dashboard`)
     }
   }
  

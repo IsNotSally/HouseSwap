@@ -10,10 +10,10 @@ import Signup from './Signup';
 
 export default function Navbar() {
 
-  const { isAuthenticated } = useSelector(store => store.users)
+  const { isAuthenticated, userID } = useSelector(store => store.users)
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const {id} = useParams();
+  // const {id} = useParams();
 
   const [showSignupDiv, setShowSignupDiv] = useState(false);
   const [showLoginDiv, setShowLoginDiv] = useState(false);
@@ -59,7 +59,7 @@ export default function Navbar() {
           :
           <div className="nav-right">
             {/* TODO: here when I click the button multiple times, then it will the same times to go back to the previous page */}
-            <button id="sign-in-btn" onClick={()=> navigate(`/dashboard/${id}/inbox`)}>Message</button>
+            {/* <button id="sign-in-btn" onClick={()=> navigate(`/dashboard/inbox/${userID}`)}>Message</button> */}
             <button id="sign-up-btn">My account</button>
             <button id='logout-btn' onClick={handleClick}>Logout</button>
           </div>
