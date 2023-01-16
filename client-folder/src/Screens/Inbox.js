@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getAllMessages, getChats, sendMessages } from '../apiService';
+import { addMessages, getAllMessages, getChats } from '../apiService';
 import Navbar from '../components/Navbar'
 import { displayAllMessages, setUserChats } from '../redux/userSlice';
 import io from "socket.io-client";
 import Conversation from '../components/Conversation';
+import Chatbox from '../components/Chatbox';
 const socket = io.connect(`http://localhost:3001`)
 
 export default function Inbox() {
 
   const { chats, userID } = useSelector(store => store.users)
+  const [currentChat, setCurrentChat] = useState({})
+
+  const [sendMessage, setSendMessage] = useState({});
+  const [receiveMessage, setReceiveMessage] = useState({});
 
   const dispatch = useDispatch();
 
@@ -23,33 +28,36 @@ export default function Inbox() {
       }
     }
     getChat()
-
-    socket.on('receiveMessage', (data) => {
-      // alert(data.message)
-    })
   }, [dispatch])
 
-  const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e, id, message) => {
-    e.preventDefault();
-    socket.emit('sendMessage', { message })
-  }
-
+  //send messages to socket server
+  useEffect(() => {
+    if(sendMessage!==null) {
+      socket.emit('send-message', sendMessage)
+    }
+  }, [sendMessage])
+  
+  //receive messages from the socket server
+ useEffect(()=>{
+  socket.on('receive-message', data => {
+    setReceiveMessage(data)
+  })
+ },[])
+ 
   return (
     <>
       <Navbar />
-
       <div className="chat">
-
         <div className='contact-container'>
           <div className='contact-list-title'>Messages</div>
           {/* list of contacts */}
           <div className='contact-list'>
             {/* each contact's div */}
             {chats.map(chat => (
-              <div className='contact'>
-                <Conversation chat={chat} userID={userID}/> 
+              <div className='contact' >
+                <Conversation chat={chat} userID={userID} />
+                <button onClick={() => {setCurrentChat(chat)}}>Open chat</button>
               </div>
             ))}
 
@@ -57,25 +65,17 @@ export default function Inbox() {
         </div>
 
         <div className="chat-container">
-          <div className='chat-title'>owner name</div>
-          <div className='messages-container'>
-            {/* each message's div */}
-            <div className='message'>
-              <p className='user-name'>user name// owner name</p>
-              <div className='message-text'>
-
-              </div>
-            </div>
-          </div>
-          <form id="msg-form" className="input-container" onSubmit={handleSubmit}>
-            <input id="text" placeholder="Type a message" value={message} onChange={(e) => { setMessage(e.target.value) }} />
-            <input type="submit" value="SEND" className="send-button" />
-          </form>
+        
+            <Chatbox userID={userID} currentChat={currentChat} setSendMessage={setSendMessage}
+          receiveMessage={receiveMessage}/> 
+         
         </div>
-
       </div>
 
+
+
     </>
+
 
   )
 }

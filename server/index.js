@@ -19,9 +19,9 @@ app.use(router);
 
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
-  // socket.on('sendMessage',(data)=> {
-  //   socket.broadcast.emit('receiveMessage', data)
-  // })
+  socket.on('send-message',(data)=> {
+    socket.broadcast.emit('receive-message', data)
+  })
 });
 
 

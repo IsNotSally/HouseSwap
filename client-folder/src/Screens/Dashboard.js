@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 import House from '../components/House';
 import Navbar from '../components/Navbar';
 import Prompt from '../components/Prompt';
-import { getUserHouses } from '../apiService';
-import { setUserHouse } from '../redux/userSlice';
+import { getUser, getUserHouses } from '../apiService';
+import { setUserHouse, setUserLogin } from '../redux/userSlice';
 
 export default function Dashboard() {
-  const {userID} = useSelector(store=>store.users);
+  const {userID, userHouse} = useSelector(store=>store.users);
   const { houses } = useSelector(store => store.houses);
   const dispatch = useDispatch()
-  //useEffect 
+
 //  useEffect(() => {
-//    //fetch user;s houses
+//    //fetch user'houses
 //    const getUserHouse = async () => {
 //     const res = await getUserHouses(userID);
 //     if (houses) {
@@ -24,6 +24,7 @@ export default function Dashboard() {
 //   getUserHouse()
    
 //  }, [dispatch])
+
  
   const [showPrompt, setShowPrompt] = useState(false)
 

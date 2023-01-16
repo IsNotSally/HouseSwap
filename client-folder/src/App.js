@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { getAllHouses } from './apiService';
+import { getAllHouses, getUser } from './apiService';
 import Footer from './components/Footer';
 import { setHouses } from './redux/houseSlice';
-import { setUserLogin } from './redux/userSlice';
+import { setUserHouse, setUserLogin } from './redux/userSlice';
 import Dashboard from './Screens/Dashboard';
 import Home from './Screens/Home';
 import Inbox from './Screens/Inbox';
@@ -13,7 +13,7 @@ import Myhome from './Screens/Myhome';
 function App() {
 
   const dispatch = useDispatch();
- const {isAuthenticated} = useSelector(store=>store.users)
+ const {userID, isAuthenticated} = useSelector(store=>store.users)
 
   useEffect(() => {
     const getHouses = async () => {
@@ -29,7 +29,15 @@ function App() {
     }
   }, [dispatch])
 
-  //TODO: each route should have a similar check like line 40
+  // useEffect(() => { 
+  //   const getuser = async () => {
+  //     const res = await getUser(userID)
+  //     dispatch(setUserHouse(res.houses))
+  //   }
+  //   getuser()
+  // },[dispatch])
+
+  //TODO: each route should have a similar authentication check 
   return (
     <div className="App">
       <Router>

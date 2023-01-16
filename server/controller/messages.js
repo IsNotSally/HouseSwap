@@ -7,7 +7,6 @@ exports.addMessage = async (req, res) => {
     senderId,
     text,
   });
-  console.log(message);
   try {
     const result = await message.save();
     res.status(200)
@@ -20,9 +19,8 @@ exports.addMessage = async (req, res) => {
 
 exports.getMessages = async (req, res) => {
   const { chatId } = req.params;
-  console.log(chatId);
   try {
-    const result = await Message.find({ chatId });
+    const result = await Message.find({ chatId : chatId });
     res.status(200)
     res.send(result);
   } catch (error) {

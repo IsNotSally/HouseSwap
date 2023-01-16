@@ -55,7 +55,7 @@ exports.getAllHouses = () => {
 }
 
 // exports.getUserHouses = (userId) => {
-//   return fetch(`${BASE_URL}/dashboard/${userId}`)
+//   return fetch(`${BASE_URL}/${userId}`)
 //     .then((res) => res.json())
 //     .catch((err) => console.log(err));
 // }
@@ -86,22 +86,18 @@ exports.getChats = (id) => {
     .catch((err) => console.log(err));
 }
 
-// exports.sendMessages = (id, message) => {
-//   return fetch(`${BASE_URL}/dashboard/inbox/`, {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify({id, message}),
-//   })
-//     .then((res) => res.json())
-//     .catch((err) => console.log(err));
-// }
+exports.addMessages = (newMessage) => {
+  return fetch(`${BASE_URL}/message`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(newMessage),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}
 
-// exports.getAllMessages = (id) => {
-//   return fetch(`${BASE_URL}/dashboard/inbox`, {
-//     method: 'GET',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(id),
-//   })
-//     .then((res) => res.json())
-//     .catch((err) => console.log(err));
-// }
+exports.getAllMessages = (chatId) => {
+  return fetch(`${BASE_URL}/message/${chatId}`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}

@@ -147,21 +147,21 @@ code {
 }
 
 .home-call-to-action {
-  background-color: #f2f2f2; 
-  padding: 20px; 
-  border: 5px solid lightblue; 
-  text-align: center; 
+  background-color: #f2f2f2;
+  padding: 20px;
+  border: 5px solid lightblue;
+  text-align: center;
   background-image: url('https://img.freepik.com/free-photo/hand-painted-watercolor-background-with-sky-clouds-shape_24972-1108.jpg?w=2000');
 }
 
 .home-call-to-action ul {
-  margin: 0; 
+  margin: 0;
   /* padding: 0; */
 }
 
 .home-call-to-action ul li {
-  display: inline-block; 
-  margin: 0 50px; 
+  display: inline-block;
+  margin: 0 50px;
 }
 
 /* Login o register page */
@@ -231,7 +231,7 @@ button[type="submit"]:hover {
 .edit-home {
   display: flex;
   justify-content: center;
-  
+
 }
 
 .edit-home .card {
@@ -298,12 +298,13 @@ button[type="submit"]:hover {
   text-align: center;
 }
 
-.call-to-action  button {
+.call-to-action button {
   position: absolute;
   bottom: 20px;
   right: 20px;
   padding: 10px 20px;
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50;
+  /* Green */
   color: white;
   border: none;
   cursor: pointer;
@@ -316,97 +317,109 @@ button[type="submit"]:hover {
 
 /* inbox */
 .chat {
-    background-color: lightgray;
-    display: flex;
-    justify-content: space-between;
+  background-color: lightgray;
+  display: flex;
+  justify-content: space-between;
 }
 
 .contact-container {
-    width: 25%;
-    height: 100vh;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 2px 2px 5px gray;
+  width: 25%;
+  height: 100vh;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 2px 2px 5px gray;
 }
 
 .contact-list-title {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-    height: 10%;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  height: 10%;
 }
 
 .contact-list {
-    padding: 0;
-    margin: 0;
-    height: 90%;
+  padding: 0;
+  margin: 0;
+  height: 90%;
 }
 
 .contact {
-  display: flex;
   background-color: #007bff;
   height: 15%;
 }
+
 .chat-container {
-    width: 75%;
-    height: 100vh;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 2px 2px 5px gray;
-    overflow-y: scroll;
+  width: 75%;
+  height: 100vh;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 2px 2px 5px gray;
+  overflow-y: scroll;
 }
 
 .chat-title {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 10px;
-    height: 10%;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+  height: 10%;
+  width: 100%;
+  background-color: bisque;
 }
 
-.messages-container {
-    padding: 10px;
-    height: 80%;
+.message-box {
+  height: 80%;
 }
 
-.message {
-    margin-bottom: 10px;
-    height: 15%;
-    width: 70%;
-    background-color: #e5e5e5;
+.messages {
+  width: 70%;
+  height: 15%;
+  margin-bottom: 10px;
+}
+
+.message-right {
+  align-self: flex-end;
+  margin-left: auto;
+  background-color: lightgreen;
+}
+
+.message-left {
+  background-color: #e5e5e5;
+  align-self: flex-start;
+  margin-right: auto;
+  background-color: pink;
 }
 
 .user-name {
-    font-weight: bold;
-    margin-bottom: 5px;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .message-text {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #ccc;
 }
 
 .input-container {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    height: 10%;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  height: 10%;
 }
 
 #text {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    flex-grow: 1;
-    margin-right: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  flex-grow: 1;
+  margin-right: 10px;
 }
 
 .send-button {
-    padding: 10px;
-    background-color:#007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-

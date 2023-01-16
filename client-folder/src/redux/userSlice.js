@@ -22,10 +22,7 @@ const userSlice = createSlice({
       }
     },
     setUserLogout: (state, action) => {
-      return {
-        ...state,
-        isAuthenticated: false
-      }
+      state.isAuthenticated = false
     },
     //TODO: CHANGE THE NAME, IT IS CONFUSING
     handleChange: (state, action) => {
@@ -39,7 +36,7 @@ const userSlice = createSlice({
       }
     },
     setUserChats: (state, action) => {
-      state.chats = action.payload
+       state.chats = action.payload
     },
     displayAllMessages: (state, action) => {
       state.messages = action.payload;

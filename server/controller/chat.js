@@ -20,7 +20,6 @@ exports.userChats = async (req, res) => {
     });
     res.status(200)
     res.send(chats)
-    
   } catch (error) {
     console.log(error);
   }

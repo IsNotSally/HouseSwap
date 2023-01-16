@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { getUser } from '../apiService';
 
-export default function Conversation({chat, userID}) {
- 
+export default function Conversation({ chat, userID }) {
+
   const [userData, setUserData] = useState({});
 
-  useEffect(()=> {
+  useEffect(() => {
     const anotherUserId = chat.members.find(id => id !== userID)
-    const getUserData = async() => {
+    const getUserData = async () => {
       const res = await getUser(anotherUserId)
       setUserData(res)
-      console.log(userData);
     }
     getUserData()
-  },[])
- 
+  }, [userID])
+
   return (
-    <div className='conversation'>
-      <p>{userData.name}</p>
-    </div>
+    <p>{userData.name}</p>
   )
 }
