@@ -12,17 +12,16 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <div className='home'>
+      <h1 className='discover-title'>Explore houses around the world</h1>
+      <div className='houses-container'>
 
-        <Discover />
-        <div className='houses-container'>
-          {
-            houses.map(house => {
-              return <House key={house._id} house={house} />
-            })
-          }
-        </div>
+        {
+          houses.map(house => {
+            return <House key={house._id} house={house} />
+          })
+        }
       </div>
+
       <div className='home-call-to-action'>
         <h2>How does it work?</h2>
         <h3>Start the exchange in 3 steps:</h3>

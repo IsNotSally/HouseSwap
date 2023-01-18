@@ -42,8 +42,8 @@ exports.logout = (tokenName) => {
     .catch((err) => console.log(err));
 }
 
-exports.getUser = (id) => {
-  return fetch(`${BASE_URL}/user/${id}`)
+exports.getUser = (userId) => {
+  return fetch(`${BASE_URL}/user/${userId}`)
   .then((res) => res.json())
   .catch((err) => console.log(err));
 }
@@ -54,27 +54,32 @@ exports.getAllHouses = () => {
     .catch((err) => console.log(err));
 }
 
-// exports.getUserHouses = (userId) => {
-//   return fetch(`${BASE_URL}/${userId}`)
-//     .then((res) => res.json())
-//     .catch((err) => console.log(err));
-// }
+exports.getUserHouses = (userId) => {
+  return fetch(`${BASE_URL}/dashboard/${userId}`)
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+}
 
-exports.createMyHome = (userId, home) => {
+exports.getHouseById = (id) => {
+  return fetch(`${BASE_URL}/${id}`)
+  .then((res) => res.json())
+  .catch((err) => console.log(err));
+}
+exports.createMyHome = (userId, form) => {
   return fetch(`${BASE_URL}/dashboard/my-home`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({userId, home }),
+    body: JSON.stringify({userId, form}),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
 }
 
-exports.createChat  = () => {
+exports.createChat  = (senderId, receiverId) => {
   return fetch(`${BASE_URL}/inbox`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(),
+    body: JSON.stringify({senderId, receiverId}),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));
@@ -84,6 +89,12 @@ exports.getChats = (id) => {
   return fetch(`${BASE_URL}/inbox/${id}`)
     .then((res) => res.json())
     .catch((err) => console.log(err));
+}
+
+exports.findChat = (firstId, secondId) =>{
+  return fetch(`${BASE_URL}/find/${firstId}/${secondId}`)
+  .then((res) => res.json())
+  .catch((err) => console.log(err));
 }
 
 exports.addMessages = (newMessage) => {
@@ -101,3 +112,4 @@ exports.getAllMessages = (chatId) => {
     .then((res) => res.json())
     .catch((err) => console.log(err));
 }
+

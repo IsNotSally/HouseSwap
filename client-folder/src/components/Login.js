@@ -21,6 +21,7 @@ export default function Login({ handleClose, handleSignupClick }) {
     } else {
       alert(`${res.message}`);
       localStorage.setItem('accessToken', res.accessToken);
+      localStorage.setItem('userId', res.id)
       dispatch(setUserLogin(res.id))
       // navigate(`/dashboard`)
 

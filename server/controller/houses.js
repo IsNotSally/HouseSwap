@@ -33,24 +33,21 @@ exports.getHouseById = async (req, res) => {
   }
 }
 
-// exports.search = async (req, res) => {
-//   try {
-//     const searchQuery = req.body.search;
-//     res.status(201);
-//     res.send(`Results for: ${searchQuery}`)
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
 exports.postHouse = async (req, res) => {
+  const  {userId, form}  = req.body;
   try {
-    const  {userId, home}  = req.body;
     const newHouse = await new House({
       userId: userId,
-      host_name: home.hostname,
-      description: home.description,
-      location: home.location
+      host_name: form.host_name,
+      description: form.description,
+      location: form.location,
+      houseTitle: form.houseTitle,
+      type:form.type,
+      bedrooms:form.bedrooms,
+      bathrooms:form.bathrooms,
+      image: form.image,
+      startDate: form.startDate,
+      endDate: form.endDate
     })
     const {_id} = await newHouse.save();
     await User.findOneAndUpdate({ _id: userId }, { $addToSet: { houses: _id } },
@@ -67,9 +64,9 @@ exports.postHouse = async (req, res) => {
 exports.getUserHouse= async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await User.find({_id: userId})
+    const user = await User.findById({_id: userId})
     res.status(201);
-    res.send(user)
+    res.send(user.houses)
   } catch (error) {
     console.log(error);
     res.status(401)

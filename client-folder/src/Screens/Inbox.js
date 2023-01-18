@@ -10,10 +10,9 @@ import Chatbox from '../components/Chatbox';
 const socket = io.connect(`http://localhost:3001`)
 
 export default function Inbox() {
-
-  const { chats, userID } = useSelector(store => store.users)
+  const userId = localStorage.getItem('userId')
+  const { chats, currentChatBox } = useSelector(store => store.users)
   const [currentChat, setCurrentChat] = useState({})
-
   const [sendMessage, setSendMessage] = useState({});
   const [receiveMessage, setReceiveMessage] = useState({});
 
@@ -22,7 +21,7 @@ export default function Inbox() {
   //to fetch all the chats from the db
   useEffect(() => {
     const getChat = async () => {
-      const userchat = await getChats(userID);
+      const userchat = await getChats(userId);
       if (userchat) {
         dispatch(setUserChats(userchat))
       }
@@ -33,42 +32,46 @@ export default function Inbox() {
 
   //send messages to socket server
   useEffect(() => {
-    if(sendMessage!==null) {
+    if (sendMessage !== null) {
       socket.emit('send-message', sendMessage)
     }
   }, [sendMessage])
-  
+
   //receive messages from the socket server
- useEffect(()=>{
-  socket.on('receive-message', data => {
-    setReceiveMessage(data)
-  })
- },[])
- 
+  useEffect(() => {
+    socket.on('receive-message', data => {
+      setReceiveMessage(data)
+    })
+  }, [])
+
   return (
     <>
       <Navbar />
       <div className="chat">
         <div className='contact-container'>
-          <div className='contact-list-title'>Messages</div>
+          <div className='contact-list-title'>
+            <p>Messages</p>
+          </div>
           {/* list of contacts */}
           <div className='contact-list'>
             {/* each contact's div */}
             {chats.map(chat => (
-              <div className='contact' >
-                <Conversation chat={chat} userID={userID} />
-                <button onClick={() => {setCurrentChat(chat)}}>Open chat</button>
+              <div className={chat._id === currentChatBox ? "contact active-chat" : 'contact'}>
+                <Conversation chat={chat} userId={userId} />
+                <button className='open-chat' onClick={() => {setCurrentChat(chat)}}></button>
               </div>
-            ))}
+            )
+          )
+          }
 
           </div>
         </div>
 
         <div className="chat-container">
-        
-            <Chatbox userID={userID} currentChat={currentChat} setSendMessage={setSendMessage}
-          receiveMessage={receiveMessage}/> 
-         
+
+          <Chatbox userId={userId} currentChat={currentChat} setSendMessage={setSendMessage}
+            receiveMessage={receiveMessage} />
+
         </div>
       </div>
 

@@ -23,6 +23,7 @@ export default function Signup({handleClose,handleLoginClick}) {
     } else {
       alert(`${res.message}`);
       localStorage.setItem('accessToken', res.accessToken);
+      localStorage.setItem('userId', res._id)
       dispatch(setUserLogin())
       // navigate(`/dashboard/${res._id}`)
     }

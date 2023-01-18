@@ -8,22 +8,21 @@ import Prompt from '../components/Prompt';
 import { getUser, getUserHouses } from '../apiService';
 import { setUserHouse, setUserLogin } from '../redux/userSlice';
 
+
 export default function Dashboard() {
-  const {userID, userHouse} = useSelector(store=>store.users);
+  // const {userHouse} = useSelector(store=>store.users);
   const { houses } = useSelector(store => store.houses);
   const dispatch = useDispatch()
 
-//  useEffect(() => {
-//    //fetch user'houses
-//    const getUserHouse = async () => {
-//     const res = await getUserHouses(userID);
-//     if (houses) {
-//       dispatch(setUserHouse(houses))
-//     }
-//   }
-//   getUserHouse()
-   
-//  }, [dispatch])
+ useEffect(() => {
+   //fetch user'houses
+   const userId = localStorage.getItem('userId')
+   const getUserHouse = async () => {
+    const res = await getUserHouses(userId);
+    dispatch(setUserHouse(res))
+  }
+  getUserHouse()
+ }, [dispatch])
 
  
   const [showPrompt, setShowPrompt] = useState(false)
@@ -31,7 +30,6 @@ export default function Dashboard() {
   return (
     <div className='dashboard'>
       <Navbar />
-    
       <div className='call-to-action'>
         <h1>Ready to exchange? <br /> Create your house!</h1>
         <Link to={`my-home`}>
@@ -39,7 +37,7 @@ export default function Dashboard() {
         </Link>
       </div>
 
-      <Discover />
+      {/* <Discover /> */}
 
       <div className='dashboard-list'>
         {

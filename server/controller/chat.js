@@ -24,3 +24,15 @@ exports.userChats = async (req, res) => {
     console.log(error);
   }
 }
+
+exports.findChat = async (req, res) => {
+  try {
+    const chat = await Chat.findOne({
+      members: {$all: [req.params.firstId, req.params.secondId ] },
+    });
+    res.status(200)
+    res.send(chat)
+  } catch (error) {
+    console.log(error);
+  }
+}

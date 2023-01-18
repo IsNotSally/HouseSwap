@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { addMessages, getAllMessages, getUser } from '../apiService';
 
-export default function Chatbox({ currentChat, userID, setSendMessage, receiveMessage }) {
+export default function Chatbox({ currentChat, userId, setSendMessage, receiveMessage }) {
 
   const [userData, setUserData] = useState({});
   const [newMessage, setNewMessage] = useState('')
@@ -9,13 +9,13 @@ export default function Chatbox({ currentChat, userID, setSendMessage, receiveMe
 
   //fetching user data for chat title
   useEffect(() => {
-    const anotherUserId = currentChat?.members?.find(id => id !== userID)
+    const anotherUserId = currentChat?.members?.find(id => id !== userId)
     const getUserData = async () => {
       const res = await getUser(anotherUserId)
       setUserData(res)
     }
     getUserData()
-  }, [currentChat, userID])
+  }, [currentChat, userId])
 
   //fetch all the messages for this chat
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Chatbox({ currentChat, userID, setSendMessage, receiveMe
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
-      senderId: userID,
+      senderId: userId,
       text: newMessage,
       chatId: currentChat._id
     }
@@ -45,40 +45,44 @@ export default function Chatbox({ currentChat, userID, setSendMessage, receiveMe
     setNewMessage('')
 
     //send message to socket server
-    const receiverId = currentChat.members.find(id => id !== userID)
+    const receiverId = currentChat.members.find(id => id !== userId)
     setSendMessage({ ...message, receiverId })
   }
   return (
 
-    <div className='message-box'>
+    <div className='outer-container'>
       {
         currentChat
           ?
-          (
-            <>
-              <div className='chat-title'>{userData.name}</div>
-              <div className='message-container'>
-                {messages.map((message) => (
-                  <div className={message.senderId === userID ? "messages message-right" : "messages message-left"}>
-                    <p>{message.text}</p>
-                    <p>{message.createAt}</p>
-                  </div>
-                ))}
+          <div className='message-box'>
+            <div className='chat-title'>
+              <p>{userData.name}</p>
+            </div>
+            <div className='message-container'>
+              {messages.map((message) => (
+                <div className={message.senderId === userId ? "messages message-right" : "messages message-left"}>
+                  <p>{message.text}</p>
+                  <p>{message.createAt}</p>
+                </div>
+              ))}
 
-              </div>
-            </>
-          )
+            </div>
+            <div className='form-container'>
+              <form id="msg-form" className="input-container" onSubmit={handleSubmit}>
+                <input id="text" placeholder="Type a message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+                <input type="submit" value="SEND" className="send-button" />
+              </form>
+            </div>
+          </div>
+
           :
-          (
-            <span className="chatbox-empty-message">
-              Tap on a chat to start conversation...
-            </span>
-          )
+
+          <span className="chatbox-empty-message">
+            Tap on a chat to start conversation...
+          </span>
+
       }
-      <form id="msg-form" className="input-container" onSubmit={handleSubmit}>
-        <input id="text" placeholder="Type a message" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
-        <input type="submit" value="SEND" className="send-button" />
-      </form>
+
 
 
     </div>

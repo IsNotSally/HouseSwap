@@ -13,7 +13,7 @@ export default function Prompt({setShowPrompt}) {
       <div className="card">
         <button onClick={handleClose} className="close-button">X</button>
         <h2>You need to create a house to contact the other owners!</h2>
-        <button type="submit" onClick={()=> navigate('my-home')}>Create my first House!</button>
+        <button className='create-btn' type="submit" onClick={()=> navigate('my-home')}>Create my first House!</button>
       </div>
     </div>
   )

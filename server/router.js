@@ -1,4 +1,4 @@
-const { createChat, userChats } = require('./controller/chat');
+const { createChat, userChats, findChat } = require('./controller/chat');
 const { importHouses, getAllHouses, getHouseById, search, postHouse, getUserHouse } = require('./controller/houses');
 const { getMessages, addMessage } = require('./controller/messages');
 const { login, create, logout, getUser } = require('./controller/user');
@@ -27,6 +27,7 @@ router.post('/logout', authMiddleware, logout)
 
 router.get('/user/:id', getUser)
 
+
 //user can post their home 
 router.post('/dashboard/my-home', postHouse)
 router.get('/dashboard/:id', getUserHouse)
@@ -34,6 +35,7 @@ router.get('/dashboard/:id', getUserHouse)
 //logged user can see all the chat
 router.get('/inbox/:id', userChats)
 router.post('/inbox', createChat)
+router.get('/find/:firstId/:secondId', findChat)
 
 //user can go into specific chat and send and get all messages
 router.post('/message', addMessage)

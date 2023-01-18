@@ -53,9 +53,9 @@ exports.logout= async (req, res) => {
 }
 
 exports.getUser= async (req, res) => {
-  const id = req.params.id;
+ 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById({_id: req.params.id});
     if (user) {
       res.status(200)
       res.send(user)
@@ -63,6 +63,8 @@ exports.getUser= async (req, res) => {
       res.status(404).json("No such User");
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500)
+    console.log(error);
   }
 }
+

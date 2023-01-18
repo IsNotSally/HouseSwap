@@ -6,6 +6,7 @@ const initialState = {
   userHouse: [],
   formData: {},
   chats: [],
+  currentChatBox:"",
   isAuthenticated: false
 };
 
@@ -30,20 +31,20 @@ const userSlice = createSlice({
       state.formData[name] = value;
     },
     setUserHouse: (state, action) => {
-      return {
-        ...state,
-        userHouse: [...state.userHouse, action.payload]
-      }
+      state.userHouse = action.payload
     },
     setUserChats: (state, action) => {
-       state.chats = action.payload
+      state.chats = action.payload
     },
-    displayAllMessages: (state, action) => {
-      state.messages = action.payload;
+    setUserId: (state, action) => {
+      state.userID = action.payload;
+    },
+    setCurrentChat: (state, action) => {
+      state.currentChatBox = action.payload;
     },
   },
 });
 
-export const { setUserLogin, setUserLogout, setUserHouse, handleChange, setUserChats, displayAllMessages } = userSlice.actions;
+export const { setUserLogin, setUserLogout, setUserHouse, handleChange, setUserChats, setUserId,setCurrentChat } = userSlice.actions;
 export default userSlice.reducer;
 
