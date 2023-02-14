@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(router);
 
 io.on('connection', (socket) => {
-  console.log('a user connected', socket.id);
+  //console.log('a user connected', socket.id);
   socket.on('send-message',(data)=> {
     socket.broadcast.emit('receive-message', data)
   })

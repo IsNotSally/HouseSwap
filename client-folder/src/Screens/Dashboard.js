@@ -14,17 +14,17 @@ export default function Dashboard() {
   const { houses } = useSelector(store => store.houses);
   const dispatch = useDispatch()
 
- useEffect(() => {
-   //fetch user'houses
-   const userId = localStorage.getItem('userId')
-   const getUserHouse = async () => {
-    const res = await getUserHouses(userId);
-    dispatch(setUserHouse(res))
-  }
-  getUserHouse()
- }, [dispatch])
+  useEffect(() => {
+    //fetch user'houses
+    const userId = localStorage.getItem('userId')
+    const getUserHouse = async () => {
+      const res = await getUserHouses(userId);
+      dispatch(setUserHouse(res))
+    }
+    getUserHouse()
+  }, [dispatch])
 
- 
+
   const [showPrompt, setShowPrompt] = useState(false)
 
   return (
@@ -36,16 +36,16 @@ export default function Dashboard() {
           <button>Create my house</button>
         </Link>
       </div>
-
+      
       {/* <Discover /> */}
 
       <div className='dashboard-list'>
         {
-          houses.map(house => <House key={house._id} house={house} setShowPrompt={setShowPrompt}/>)
+          houses.map(house => <House key={house._id} house={house} setShowPrompt={setShowPrompt} />)
         }
       </div>
-      
-      {showPrompt ? <Prompt setShowPrompt={setShowPrompt}/> : ''}
+
+      {showPrompt ? <Prompt setShowPrompt={setShowPrompt} /> : ''}
 
     </div>
   )

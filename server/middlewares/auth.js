@@ -1,7 +1,7 @@
 
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
-const SECRET_KEY = 'my-secret-house'
+const SECRET_KEY = process.env.SECRET_KEY
 
 const authMiddleware = async (req, res, next) => {
 
@@ -24,3 +24,4 @@ const authMiddleware = async (req, res, next) => {
 };
 
 module.exports = authMiddleware;
+

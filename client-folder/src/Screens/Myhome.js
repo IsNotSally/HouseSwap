@@ -60,6 +60,12 @@ export default function Myhome() {
     });
   }
 
+ //send request to server to create home and update the database 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await sendToCloudinary();
+  }
+  
   //handle image upload, instead of save image to database, 
   //we upload it to cloudinary and it returns a image url
   const sendToCloudinary = async function () {
@@ -78,11 +84,7 @@ export default function Myhome() {
     })
   }
 
-  //send request to server to create home and update the database 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await sendToCloudinary();
-  }
+ 
 
   // update the database
   const sendToDb = async () => {
