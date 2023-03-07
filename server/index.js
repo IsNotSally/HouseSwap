@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const cors = require('cors');
 const corsConfig = {
-  origin: 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 }
 const io = new Server(server, {cors: corsConfig});
