@@ -14,7 +14,7 @@ const corsConfig = {
 }
 const io = new Server(server, {cors: corsConfig});
 
-const PORT = 8080;
+const PORT = process.env.MYPORT;
 app.use(cors(corsConfig));
 app.use(express.json());
 app.use(router);
