@@ -7,7 +7,7 @@ import { displayAllMessages, setUserChats } from '../redux/userSlice';
 import io from "socket.io-client";
 import Conversation from '../components/Conversation';
 import Chatbox from '../components/Chatbox';
-const socket = io.connect(`http://localhost:3001`)
+const socket = io.connect(process.env.REACT_APP_SERVER_URL)
 
 export default function Inbox() {
   const userId = localStorage.getItem('userId')
