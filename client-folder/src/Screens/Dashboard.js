@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Discover from '../components/Discover'
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import House from '../components/House';
 import Navbar from '../components/Navbar';
 import Prompt from '../components/Prompt';
@@ -46,7 +46,7 @@ export default function Dashboard() {
       </div>
 
       {showPrompt ? <Prompt setShowPrompt={setShowPrompt} /> : ''}
-
+      <Outlet />
     </div>
   )
 }

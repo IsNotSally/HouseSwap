@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      {/* <Router>
         <Routes>
           <Route path='/' element={ !isAuthenticated ? <Home /> : <Navigate to='/dashboard'/>} />
           <Route path="/dashboard" element={ isAuthenticated ? <Dashboard /> : <Navigate to='/'/>}/>
@@ -46,7 +46,7 @@ function App() {
           <Route path='/search' element={ <Search /> }/>
           <Route path='/dashboard/:id' element={ <Myaccount /> }/>
         </Routes>
-      </Router>
+      </Router> */}
       <Footer />
     </div>
   );
